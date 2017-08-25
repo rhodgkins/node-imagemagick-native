@@ -360,7 +360,7 @@ void DoConvert(uv_work_t* req) {
             }
 
             if (debug) printf( "resize to: %d, %d\n", resizewidth, resizeheight );
-            Magick::Geometry resizeGeometry( resizewidth, resizeheight, 0, 0, 0, 0 );
+            Magick::Geometry resizeGeometry( resizewidth, resizeheight, 0, 0 );
             try {
                 image.zoom( resizeGeometry );
             }
@@ -378,7 +378,7 @@ void DoConvert(uv_work_t* req) {
             if ( strcmp ( gravity, "None" ) != 0 ) {
                 // limit canvas size to cropGeometry
                 if (debug) printf( "crop to: %d, %d, %d, %d\n", width, height, xoffset, yoffset );
-                Magick::Geometry cropGeometry( width, height, xoffset, yoffset, 0, 0 );
+                Magick::Geometry cropGeometry( width, height, xoffset, yoffset );
 
                 Magick::Color transparent( "transparent" );
                 if ( strcmp( context->format.c_str(), "PNG" ) == 0 ) {
@@ -444,7 +444,7 @@ void DoConvert(uv_work_t* req) {
 
              // limit canvas size to cropGeometry
              if (debug) printf( "crop to: %d, %d, %d, %d\n", width, height, xoffset, yoffset );
-             Magick::Geometry cropGeometry( width, height, xoffset, yoffset, 0, 0 );
+             Magick::Geometry cropGeometry( width, height, xoffset, yoffset );
 
              Magick::Color transparent( "transparent" );
              if ( strcmp( context->format.c_str(), "PNG" ) == 0 ) {
@@ -957,7 +957,7 @@ NAN_METHOD(QuantizeColors) {
     ssize_t rows = 196; ssize_t columns = 196;
 
     if (debug) printf( "resize to: %d, %d\n", (int) rows, (int) columns );
-    Magick::Geometry resizeGeometry( rows, columns, 0, 0, 0, 0 );
+    Magick::Geometry resizeGeometry( rows, columns, 0, 0 );
     image.zoom( resizeGeometry );
 
     if (debug) printf("totalColors before: %d\n", (int) image.totalColors());
