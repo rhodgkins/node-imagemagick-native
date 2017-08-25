@@ -295,7 +295,7 @@ void DoConvert(uv_work_t* req) {
         ssize_t option_info = MagickCore::ParseCommandOption(MagickCore::MagickFilterOptions, Magick::MagickFalse, filter);
         if (option_info != -1) {
             if (debug) printf( "filter: %s\n", filter );
-            image.filterType( (Magick::FilterTypes)option_info );
+            image.filterType( (Magick::FilterType)option_info );
         }
         else {
             context->error = std::string("filter not supported");
