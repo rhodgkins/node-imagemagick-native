@@ -380,13 +380,10 @@ void DoConvert(uv_work_t* req) {
                 if (debug) printf( "crop to: %d, %d, %d, %d\n", width, height, xoffset, yoffset );
                 Magick::Geometry cropGeometry( width, height, xoffset, yoffset );
 
-                Magick::Color transparent( "transparent" );
-                if ( strcmp( context->format.c_str(), "PNG" ) == 0 ) {
-                    // make background transparent for PNG
-                    // JPEG background becomes black if set transparent here
-                    transparent.alpha( 1. );
-                }
-
+					 // make background transparent for PNG
+					 // JPEG background becomes opaque
+                Magick::Color transparent( strcmp( context->format.c_str(), "PNG" ) == 0 ? "opaque" : "transparent" );
+                
                 #if MagickLibVersion > 0x654
                     image.extent( cropGeometry, transparent );
                 #else
@@ -446,13 +443,10 @@ void DoConvert(uv_work_t* req) {
              if (debug) printf( "crop to: %d, %d, %d, %d\n", width, height, xoffset, yoffset );
              Magick::Geometry cropGeometry( width, height, xoffset, yoffset );
 
-             Magick::Color transparent( "transparent" );
-             if ( strcmp( context->format.c_str(), "PNG" ) == 0 ) {
-                 // make background transparent for PNG
-                 // JPEG background becomes black if set transparent here
-                 transparent.alpha( 1. );
-             }
-
+				 // make background transparent for PNG
+				 // JPEG background becomes opaque
+             Magick::Color transparent( strcmp( context->format.c_str(), "PNG" ) == 0 ? "opaque" : "transparent" );
+             
              #if MagickLibVersion > 0x654
                  image.extent( cropGeometry, transparent );
              #else
